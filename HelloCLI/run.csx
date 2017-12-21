@@ -26,8 +26,8 @@ public static IActionResult Run(HttpRequest req, TraceWriter log)
 
     var schedule = new Schedule(){
         Lessons = new[]{ 
-            new Lesson(){ Start =  new DateTime(2018,1,3), Duration = 30},
-            new Lesson(){ Start =  new DateTime(2018,1,10), Duration = 30}}};
+            new Lesson(){ Start =  new DateTime(2018,1,3), Duration = 30, Shared = true},
+            new Lesson(){ Start =  new DateTime(2018,1,10), Duration = 30, Shared = false}}};
 
     var jsonToReturn = JsonConvert.SerializeObject(schedule);
 
