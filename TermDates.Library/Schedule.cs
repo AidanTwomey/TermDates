@@ -5,7 +5,7 @@ namespace aidantwomey.src.Azure.Functions.TermDates.TermDates.Library
 
     public class Lesson{
         public DateTime Start { get;set;}
-        public int Duration { get;set;}
+        public TimeSpan Duration { get; set;}
         public bool Shared { get;set;}
     }
 
