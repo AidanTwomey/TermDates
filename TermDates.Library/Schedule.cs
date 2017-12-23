@@ -1,4 +1,4 @@
-namespace aidantwomey.src.Azure.Functions.TermDates.TermDates.Library
+namespace aidantwomey.src.Azure.Functions.TermDates.Library
 {
     using System;
     using System.Collections.Generic;
