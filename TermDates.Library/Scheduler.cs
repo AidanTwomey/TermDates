@@ -6,47 +6,40 @@ namespace aidantwomey.src.Azure.Functions.TermDates.Library
 
     public class Scheduler
     {
-        public static Schedule Generate(Term term, IEnumerable<DayOfWeek> days)
+        public static Schedule Generate(Term term, IEnumerable<LessonDefinition> days)
         {
-            return Generate(term, days, 1, new NullBreak());
+            return Generate(term, days, new NullBreak());
         }
 
-        public static Schedule Generate(Term term, IEnumerable<DayOfWeek> days, int weeksPerLesson)
+        public static Schedule Generate(Term term, IEnumerable<LessonDefinition> days, params TermBreak[] breaks)
         {
-            return Generate(term, days, weeksPerLesson, new NullBreak());
+            var lessons = days
+                           .SelectMany( d => GetLessonsScedule(term, d, breaks))
+                           .OrderBy(l => l.Start);
+
+            return new Schedule(){ Lessons = lessons };
         }
 
-        public static Schedule Generate(Term term, IEnumerable<DayOfWeek> days, params TermBreak[] breaks)
-        {
-            return Generate(term, days, 1, breaks);
-        }
-
-        public static Schedule Generate(Term term, IEnumerable<DayOfWeek> days, int weeksPerLesson, params TermBreak[] breaks)
-        {
-            return new Schedule(){ Lessons = days.SelectMany( d => GetLessonsScedule(term, d, breaks, weeksPerLesson) ) };
-        }
-
-        private static IEnumerable<Lesson> GetLessonsScedule(Term term, DayOfWeek day, IEnumerable<TermBreak> breaks, int weeksPerLesson = 1)
+        private static IEnumerable<Lesson> GetLessonsScedule(Term term, LessonDefinition day, IEnumerable<TermBreak> breaks)
         {
             DateTime firstDate = term.Start;
-            int daysBetweenLessons = 7 * weeksPerLesson;
 
-            while (firstDate.DayOfWeek != day)
+            while (firstDate.DayOfWeek != day.Day)
             {
                 firstDate = firstDate.AddDays(1);
             }
 
-            yield return new Lesson(){Start = firstDate};
+            yield return new Lesson(){Start = firstDate, Duration = day.Duration};
 
-            DateTime nextDate = firstDate.AddDays(daysBetweenLessons);
+            DateTime nextDate = firstDate.AddDays(day.DaysBetweenLessons);
             
             while (nextDate <= term.End ) 
             {
                 if ( !(breaks.Any(b => b.WithinBreak(nextDate) )) )
                 {
-                    yield return new Lesson(){Start = nextDate};
+                    yield return new Lesson(){Start = nextDate, Duration = day.Duration};
                 }
-                nextDate = nextDate.AddDays(daysBetweenLessons);
+                nextDate = nextDate.AddDays(day.DaysBetweenLessons);
             }
         }
     }

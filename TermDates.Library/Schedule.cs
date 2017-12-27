@@ -1,17 +1,15 @@
 namespace aidantwomey.src.Azure.Functions.TermDates.Library
 {
-    using System;
     using System.Collections.Generic;
-
-    public class Lesson{
-
-        public DateTime Start { get;set;}
-        public TimeSpan Duration { get; set;}
-        public bool Shared { get;set;}
-    }
+    using System.Linq;
 
     public class Schedule
     {
         public IEnumerable<Lesson> Lessons { get;set;}
+
+        public override string ToString()
+        {
+            return Lessons.Aggregate( "", (agg,l) => agg + l.ToString() + '\n' );
+        }
     }
 }
