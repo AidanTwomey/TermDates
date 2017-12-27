@@ -32,7 +32,7 @@ public static IActionResult Run(HttpRequest req, TraceWriter log)
     var term = new Term(){
         Start = data.TermStart, 
         End = data.TermEnd};
-    var lessonDefinition = new LessonDefinition(dayMap[data.LessonDay]);
+    var lessonDefinition = new LessonDefinition(data.LessonDay);
 
     log.Info(term.Start.ToLongDateString());
 

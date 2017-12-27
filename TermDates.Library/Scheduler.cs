@@ -8,7 +8,7 @@ namespace aidantwomey.src.Azure.Functions.TermDates.Library
     {
         public DateTime TermStart { get; set;}
         public DateTime TermEnd { get; set;}
-        public int LessonDay { get; set;}
+        public DayOfWeek LessonDay { get; set;}
     }
 
     public class Scheduler
