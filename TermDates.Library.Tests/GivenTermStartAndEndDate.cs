@@ -9,14 +9,37 @@ namespace TermDates.Library.Tests
     {
         private readonly DateTime _start = new DateTime(2018,1,2);
         private readonly DateTime _end = new DateTime(2018,3,29);
+        private readonly TermBreak _halfTerm = new TermBreak(new DateTime(2018,2,12), new TimeSpan(7,0,0,0));
+            
+        [Theory]
+        [InlineData(11, DayOfWeek.Saturday)]
+        [InlineData(23, DayOfWeek.Tuesday, DayOfWeek.Saturday)]
+        public void A_schedule_is_generated_excluding_half_term(int expectedLessons, params DayOfWeek[] days)
+        {
+            var lessons = Scheduler.Generate(new Term(){Start =_start, End = _end}, days, _halfTerm).Lessons;
+            Assert.Equal(expectedLessons, lessons.Count() );
+        }
 
         [Theory]
-        [InlineData(DayOfWeek.Saturday, 1)]
-        public void A_schedule_is_generated(DayOfWeek day, int frequency)
+        [InlineData(12, 1, DayOfWeek.Saturday)]
+        [InlineData(6, 2, DayOfWeek.Saturday)]
+        public void A_schedule_is_generated(int expectedLessons, int weeksPerLesson, params DayOfWeek[] days)
         {
-            var lessons = Scheduler.Generate(new Term(){Start =_start, End = _end}, day).Lessons;
-            Assert.Equal(11, lessons.Count() );
-            Assert.Equal(6, lessons.First().Start.Day);
+            var lessons = Scheduler.Generate(new Term(){Start =_start, End = _end}, days, weeksPerLesson).Lessons;
+            Assert.Equal(expectedLessons, lessons.Count() );
+        }
+
+        [Theory]
+        [InlineData(10, 1, DayOfWeek.Saturday)]
+        [InlineData(10, 2,  DayOfWeek.Thursday, DayOfWeek.Saturday)]
+        [InlineData(22, 1,  DayOfWeek.Tuesday, DayOfWeek.Saturday)]
+        public void A_schedule_is_generated_when_teacher_takes_a_break(int expectedLessons, int weeksPerLesson, params DayOfWeek[] days)
+        {
+            var holiday1 = new TermBreak(new DateTime(2018,1,20), new TimeSpan(2,0,0,0));
+            var holiday2 = new TermBreak(new DateTime(2018,2,12), new TimeSpan(7,0,0,0));
+
+            var lessons = Scheduler.Generate(new Term(){Start =_start, End = _end}, days, weeksPerLesson, holiday1, holiday2).Lessons;
+            Assert.Equal(expectedLessons, lessons.Count() );
         }
     }
 }
