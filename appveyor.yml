@@ -5,10 +5,11 @@ build_script:
     mkdir AzureFunctions\GenerateSchedule\bin
     mkdir AzureFunctions\GetStandardTerms\bin
 
+    dotnet restore
     dotnet build TermDates.Library.sln
 
-    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateSchedule\bin\
-    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetStandardTerms\bin\
+    cp -r TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateSchedule\bin\
+    cp -r TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetStandardTerms\bin\
 artifacts:
 - path: AzureFunctions
   name: GenerateSchedule
