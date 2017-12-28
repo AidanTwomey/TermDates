@@ -9,8 +9,6 @@ build_script:
     mkdir AzureFunctions\GenerateSchedule\bin
     cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateSchedule\bin\
 
-    mkdir AzureFunctions\GetStandardTerms\bin
-    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetStandardTerms\bin\
 artifacts:
 - path: AzureFunctions
   name: GenerateSchedule
