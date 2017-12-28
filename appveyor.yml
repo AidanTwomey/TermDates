@@ -6,6 +6,7 @@ build_script:
     mkdir AzureFunctions\GetStandardTerms\bin
 
     cd
+    dir
 
     dotnet build TermDates.Library.sln
     dotnet publish
