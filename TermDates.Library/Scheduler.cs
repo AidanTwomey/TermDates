@@ -4,13 +4,6 @@ namespace aidantwomey.src.Azure.Functions.TermDates.Library
     using System.Linq;
     using System.Collections.Generic;
 
-    public class ScheduleRequest
-    {
-        public DateTime TermStart { get; set;}
-        public DateTime TermEnd { get; set;}
-        public DayOfWeek LessonDay { get; set;}
-    }
-
     public class Scheduler
     {
         public static Schedule Generate(Term term, IEnumerable<LessonDefinition> days)

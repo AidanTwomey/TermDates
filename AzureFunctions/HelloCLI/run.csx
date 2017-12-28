@@ -8,6 +8,7 @@ using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using aidantwomey.src.Azure.Functions.TermDates.Library;
+using System.Linq;
 
 public static IActionResult Run(HttpRequest req, TraceWriter log)
 {
@@ -21,11 +22,13 @@ public static IActionResult Run(HttpRequest req, TraceWriter log)
     var term = new Term(){
         Start = data.TermStart, 
         End = data.TermEnd};
-    var lessonDefinition = new LessonDefinition(data.LessonDay);
+        
+    var lessonDefinitions = data.Lessons.Select( 
+        l => new LessonDefinition(l.LessonDay, l.Duration, l.WeeksPerLesson ));
 
     log.Info(term.Start.ToLongDateString());
 
-    var schedule = Scheduler.Generate(term, new []{lessonDefinition} );
+    var schedule = Scheduler.Generate(term, lessonDefinitions );
 
     return new OkObjectResult(JsonConvert.SerializeObject(schedule));
 }
