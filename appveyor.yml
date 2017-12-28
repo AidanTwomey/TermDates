@@ -6,6 +6,7 @@ build_script:
     mkdir AzureFunctions\GetStandardTerms\bin
 
     dotnet build TermDates.Library.sln
+    dotnet publish
 
     cp -r TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateSchedule\bin\
     cp -r TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetStandardTerms\bin\
