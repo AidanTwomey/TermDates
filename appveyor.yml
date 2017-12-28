@@ -4,13 +4,9 @@ build_script:
 - cmd: >-
     mkdir AzureFunctions\GenerateSchedule\bin
     mkdir AzureFunctions\GetStandardTerms\bin
-
-    cd
     dir
-
     dotnet build TermDates.Library.sln
     dotnet publish
-
     cp -r TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateSchedule\bin\
     cp -r TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetStandardTerms\bin\
 artifacts:
