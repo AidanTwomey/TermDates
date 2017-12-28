@@ -1,0 +1,27 @@
+version: 1.0.{build}
+configuration: Release
+build_script:
+- cmd: >-
+    dotnet restore
+
+    dotnet build TermDates.Library.sln
+
+    dotnet publish
+
+
+    mkdir AzureFunctions\GenerateSchedule\bin
+
+    cp TermDates.Library/bin/Release/netstandard2.0/TermDates.Library.dll AzureFunctions/GenerateSchedule/bin/
+artifacts:
+- path: AzureFunctions
+  name: GenerateSchedule
+deploy:
+- provider: WebDeploy
+  server: https://termdates.scm.azurewebsites.net:443/msdeploy.axd?site=TermDates
+  website: TermDates
+  username: $TermDates
+  password:
+    secure: f7TwXsnmCKtLhm2JrSLBSW4Ll5AGRpY727DP+h9G2yTjkCQlkkiDVqd4mGk5RYj07TlpxBnHvAdlOEyAVSLmYw==
+  artifact: GenerateSchedule
+  aspnet_core: false
+  aspnet_core_force_restart: true
