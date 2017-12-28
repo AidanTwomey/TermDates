@@ -5,6 +5,8 @@ build_script:
     mkdir AzureFunctions\GenerateSchedule\bin
     mkdir AzureFunctions\GetStandardTerms\bin
 
+    cd
+
     dotnet build TermDates.Library.sln
     dotnet publish
 
