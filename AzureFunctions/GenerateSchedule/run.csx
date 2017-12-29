@@ -14,16 +14,14 @@ public static IActionResult Run(HttpRequest req, TraceWriter log)
 {
     log.Info("C# HTTP trigger function processed a request.");
 
-    string name = req.Query["name"];
-
     string requestBody = new StreamReader(req.Body).ReadToEnd();
-    var data = JsonConvert.DeserializeObject<ScheduleRequest>(requestBody);
+    var request = JsonConvert.DeserializeObject<ScheduleRequest>(requestBody);
 
     var term = new Term(){
-        Start = data.TermStart, 
-        End = data.TermEnd};
+        Start = request.TermStart, 
+        End = request.TermEnd};
         
-    var lessonDefinitions = data.Lessons.Select( 
+    var lessonDefinitions = request.Lessons.Select( 
         l => new LessonDefinition(l.LessonDay, l.Duration, l.WeeksPerLesson ));
 
     log.Info(term.Start.ToLongDateString());
