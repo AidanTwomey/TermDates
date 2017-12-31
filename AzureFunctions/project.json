@@ -1,0 +1,10 @@
+{
+    "frameworks": {
+      "netstandard2.0":{
+        "dependencies": {
+          "System.Data.SqlClient": "*",
+          "System.Configuration.ConfigurationManager": "*"
+        }
+      }
+     }
+  }
