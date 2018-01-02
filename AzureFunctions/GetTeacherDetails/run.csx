@@ -1,6 +1,7 @@
 #r "Newtonsoft.Json"
 #r "TermDates.Library.dll"
 #r "System.Data.SqlClient"
+#r "System.Configuration.ConfigurationManager"
 
 using System;
 using System.Data.SqlClient;
@@ -16,8 +17,8 @@ public static IActionResult Run(HttpRequest req, TraceWriter log)
 {
     var results = new List<Teacher>();
 
-    var connString = "";
-    using (SqlConnection conn = new SqlConnection(connString))
+
+    using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Teacher"].ConnectionString))
     {
         conn.Open();
         var text = "select * from TestTable";
