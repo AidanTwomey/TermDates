@@ -3,12 +3,29 @@ configuration: Release
 build_script:
 - cmd: >-
     mkdir AzureFunctions\GenerateSchedule\bin
+
     mkdir AzureFunctions\GetStandardTerms\bin
-    dir
+
+    mkdir AzureFunctions\GetTeacherDetails\bin
+
+    mkdir AzureFunctions\GenerateInvoice\bin
+
     dotnet build TermDates.Library.sln
-    dotnet publish
-    cp -r TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateSchedule\bin\
-    cp -r TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetStandardTerms\bin\
+
+    dotnet restore
+
+
+    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateSchedule\bin\
+
+
+    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetStandardTerms\bin\
+
+
+    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetTeacherDetails\bin\
+
+    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateInvoice\bin\
+test_script:
+- cmd: dotnet test TermDates.Library.Tests/TermDates.Library.Tests.csproj
 artifacts:
 - path: AzureFunctions
   name: GenerateSchedule
