@@ -52,5 +52,5 @@ public async static Task<IActionResult> Run(HttpRequest req, TraceWriter log, Ex
 
     var teacher = ((TeacherEntity)retrieved.Result);
     
-    return new OkObjectResult(JsonConvert.SerializeObject(teacher.HourlyRate));
+    return new OkObjectResult(new Teacher(){HourlyRate = teacher.HourlyRate, Name = id});
 }
