@@ -31,11 +31,11 @@ artifacts:
   name: GenerateSchedule
 deploy:
 - provider: WebDeploy
-  server: https://termdates.scm.azurewebsites.net:443/msdeploy.axd?site=TermDates
-  website: TermDates
-  username: $TermDates
+  server: https://termdatesfunctions20190306045208.scm.azurewebsites.net:443/msdeploy.axd?site=termdatesfunctions20190306045208
+  website: termdatesfunctions20190306045208
+  username: $TermDatesFunctions20190306045208
   password:
-    secure: f7TwXsnmCKtLhm2JrSLBSW4Ll5AGRpY727DP+h9G2yTjkCQlkkiDVqd4mGk5RYj07TlpxBnHvAdlOEyAVSLmYw==
+    secure: gyS7RFtZK5aRLcFv1PdjH7M4UIce2ZvEBpf1kYVdFLLmyywKn08uy6SXc7POBAOn2r0OxlJb0amEEZ5ugvcALQ==
   artifact: GenerateSchedule
   aspnet_core: false
   aspnet_core_force_restart: true
