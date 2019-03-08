@@ -15,7 +15,8 @@ namespace aidantwomey.src.Azure.Functions.TermDates.Library
         {
             var lessons = days
                            .SelectMany( d => GetLessonsScedule(term, d, breaks))
-                           .OrderBy(l => l.Start);
+                           //.OrderBy(l => l.Start)
+                           ;
 
             return new Schedule(){ Lessons = lessons };
         }
@@ -29,7 +30,7 @@ namespace aidantwomey.src.Azure.Functions.TermDates.Library
                 firstDate = firstDate.AddDays(1);
             }
 
-            yield return new Lesson(){Start = firstDate, Duration = day.Duration};
+            yield return new Lesson(){/* Start = firstDate,*/ Duration = day.Duration};
 
             DateTime nextDate = firstDate.AddDays(day.DaysBetweenLessons);
             
@@ -37,7 +38,7 @@ namespace aidantwomey.src.Azure.Functions.TermDates.Library
             {
                 if ( !(breaks.Any(b => b.WithinBreak(nextDate) )) )
                 {
-                    yield return new Lesson(){Start = nextDate, Duration = day.Duration};
+                    yield return new Lesson(){/*Start = nextDate, */ Duration = day.Duration};
                 }
                 nextDate = nextDate.AddDays(day.DaysBetweenLessons);
             }

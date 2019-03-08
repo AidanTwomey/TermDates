@@ -1,0 +1,29 @@
+{
+    "Pupils":[
+        {
+            "Name": "Alfie",
+            "Schedule":[
+                {
+                    "Day": "Monday",
+                    "Time": "16:00",
+                    "Duration": 20
+                },
+                {
+                    "Day": "Friday",
+                    "Time": "08:00",
+                    "Duration": 20
+                }
+            ]
+        },
+        {
+            "Name": "Bertie",
+            "Schedule":[
+                {
+                    "Day": "Monday",
+                    "Time": "16:20",
+                    "Duration": 40
+                }
+            ]
+        }
+    ]
+}

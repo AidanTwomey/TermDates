@@ -1,4 +1,6 @@
 
+*_accesstoken
+
 bin
 obj
 csx
@@ -24,3 +26,7 @@ project.lock.json
 .secrets
 appsettings.json
 local.settings.json
+
+node_modules
+MockTableStore
+package-lock.json
