@@ -1,29 +1,14 @@
 version: 1.0.{build}
 configuration: Release
-build_script:
+build:
+  project: TermDates.Library.sln
+  verbosity: normal
+before_package:
 - cmd: >-
     mkdir AzureFunctions\GenerateSchedule\bin
 
     mkdir AzureFunctions\GetStandardTerms\bin
 
-    mkdir AzureFunctions\GetTeacherDetails\bin
-
-    mkdir AzureFunctions\GenerateInvoice\bin
-
-    dotnet build TermDates.Library.sln
-
-    dotnet restore
-
-
-    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateSchedule\bin\
-
-
-    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetStandardTerms\bin\
-
-
-    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GetTeacherDetails\bin\
-
-    cp TermDates.Library\bin\Release\netstandard2.0\TermDates.Library.dll AzureFunctions\GenerateInvoice\bin\
 test_script:
 - cmd: dotnet test TermDates.Library.Tests/TermDates.Library.Tests.csproj
 artifacts:
