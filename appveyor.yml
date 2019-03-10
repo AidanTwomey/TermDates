@@ -1,14 +1,12 @@
 version: 1.0.{build}
 configuration: Release
-build:
-  project: TermDates.Library.sln
-  verbosity: normal
-before_package:
+build_script:
 - cmd: >-
     mkdir AzureFunctions\GenerateSchedule\bin
 
     mkdir AzureFunctions\GetStandardTerms\bin
 
+    dotnet build TermDates.Library.sln
 test_script:
 - cmd: dotnet test TermDates.Library.Tests/TermDates.Library.Tests.csproj
 artifacts:
