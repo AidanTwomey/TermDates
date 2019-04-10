@@ -4,10 +4,11 @@
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.24" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.24"/>
+    <PackageReference Include="AutofacOnFunctions" Version="1.0.14"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TermDates.Library\TermDates.Library.csproj" />
+    <ProjectReference Include="..\TermDates.Library\TermDates.Library.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

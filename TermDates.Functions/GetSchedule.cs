@@ -12,6 +12,7 @@ using System.Linq;
 
 namespace TermDates.Functions
 {
+
     public static class GetSchedule
     {
         [FunctionName("GetSchedule")]
