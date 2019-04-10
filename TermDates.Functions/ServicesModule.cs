@@ -1,4 +1,5 @@
 using System.Reflection;
+using aidantwomey.src.Azure.Functions.TermDates.Library;
 using Autofac;
 // using AutofacOnFunctions.Services.Ioc;
 
@@ -8,7 +9,7 @@ namespace TermDates.Functions
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // builder.RegisterType<MyService>();
+            builder.RegisterInstance(new Scheduler()).SingleInstance();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace TermDates.Library.Tests
         [InlineData(23, DayOfWeek.Tuesday, DayOfWeek.Saturday)]
         public void A_schedule_is_generated_excluding_half_term(int expectedLessons, params DayOfWeek[] days)
         {
-            var lessons = Scheduler.Generate(new Term(){Start =_start, End = _end}, days.Select(d => new LessonDefinition(d)) , _halfTerm).Lessons;
+            var lessons = new Scheduler().Generate(new Term(){Start =_start, End = _end}, days.Select(d => new LessonDefinition(d)) , _halfTerm).Lessons;
             Assert.Equal(expectedLessons, lessons.Count() );
         }
 
@@ -26,7 +26,7 @@ namespace TermDates.Library.Tests
         [InlineData(6, 2, DayOfWeek.Saturday)]
         public void A_schedule_is_generated(int expectedLessons, int weeksPerLesson, params DayOfWeek[] days)
         {
-            var lessons = Scheduler.Generate(new Term(){Start =_start, End = _end}, days.Select(d => new LessonDefinition(d, _duration, weeksPerLesson))).Lessons;
+            var lessons = new Scheduler().Generate(new Term(){Start =_start, End = _end}, days.Select(d => new LessonDefinition(d, _duration, weeksPerLesson))).Lessons;
             Assert.Equal(expectedLessons, lessons.Count() );
         }
 
@@ -39,7 +39,7 @@ namespace TermDates.Library.Tests
             var holiday1 = new TermBreak(new DateTime(2018,1,20), new TimeSpan(2,0,0,0));
             var holiday2 = new TermBreak(new DateTime(2018,2,12), new TimeSpan(7,0,0,0));
 
-            var lessons = Scheduler.Generate(new Term(){Start =_start, End = _end}, days.Select(d => new LessonDefinition(d, _duration, weeksPerLesson)), holiday1, holiday2);
+            var lessons = new Scheduler().Generate(new Term(){Start =_start, End = _end}, days.Select(d => new LessonDefinition(d, _duration, weeksPerLesson)), holiday1, holiday2);
             Assert.Equal(expectedLessons, lessons.Lessons.Count() );
             Assert.True( lessons.Lessons.All(l => l.Duration.Minutes == _duration));
 

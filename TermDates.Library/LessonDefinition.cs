@@ -3,9 +3,9 @@ namespace aidantwomey.src.Azure.Functions.TermDates.Library
     using System;
     public struct LessonDefinition
     {
-        public readonly DayOfWeek Day;
-        public readonly TimeSpan Duration;
-        public readonly int WeeksPerLesson;
+        public DayOfWeek Day { get; set; }
+        public TimeSpan Duration { get; set; }
+        public int WeeksPerLesson { get; set; }
 
         public LessonDefinition(DayOfWeek day)
             :this(day, 0, 1)

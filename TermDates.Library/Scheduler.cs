@@ -6,12 +6,12 @@ namespace aidantwomey.src.Azure.Functions.TermDates.Library
 
     public class Scheduler
     {
-        public static Schedule Generate(Term term, IEnumerable<LessonDefinition> days)
+        public Schedule Generate(Term term, IEnumerable<LessonDefinition> days)
         {
             return Generate(term, days, new NullBreak());
         }
 
-        public static Schedule Generate(Term term, IEnumerable<LessonDefinition> days, params TermBreak[] breaks)
+        public Schedule Generate(Term term, IEnumerable<LessonDefinition> days, params TermBreak[] breaks)
         {
             var lessons = days
                            .SelectMany( d => GetLessonsScedule(term, d, breaks))
