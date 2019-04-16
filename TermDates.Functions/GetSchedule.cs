@@ -23,7 +23,10 @@ namespace TermDates.Functions
             [OrchestrationClient] DurableOrchestrationClient starter,
             ILogger log)
         {
-            var eventData = await req.Content.ReadAsAsync<ScheduleRequest>();
+            var content = await req.Content.ReadAsStringAsync();
+            var eventData = JsonConvert.DeserializeObject<ScheduleRequest>(content);
+
+            // var eventData = await req.Content.ReadAsAsync<ScheduleRequest>();
             string instanceId = await starter.StartNewAsync("ChargeForTerm", eventData);
 
             log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
