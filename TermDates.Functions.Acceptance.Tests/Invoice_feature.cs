@@ -19,12 +19,16 @@ namespace TermDates.Functions.Acceptance.Tests
     {
         public override ScheduleRequest GetInput<ScheduleRequest>()
         {
-            var scedule = new ScheduleRequest()
-            {
-                // TermStart = new DateTime(2019, 1, 4),
-                // TermEnd = new DateTime(2019, 4, 5)
-            };
-            
+            //var scedule = new ScheduleRequest()
+            //{
+            //    // TermStart = new DateTime(2019, 1, 4),
+            //    // TermEnd = new DateTime(2019, 4, 5)
+            //};
+
+            var scedule = Activator.CreateInstance<ScheduleRequest>();
+            //scedule.TermStart = new DateTime(2019, 1, 4);
+            //scedule.TermEnd = new DateTime(2019, 4, 5);
+
             return scedule;
         }
 
